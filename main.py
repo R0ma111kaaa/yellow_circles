@@ -1,15 +1,16 @@
 import sys
 from random import randint
 
-from PyQt5 import uic
 from PyQt5.QtGui import QPainter, QColor
 from PyQt5.QtWidgets import QMainWindow, QApplication
 
+from UI import Ui_MainWindow
 
-class RandomCircle(QMainWindow):
+
+class RandomCircle(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("UI.ui", self)
+        self.setupUi(self)
 
         self.permission = False
 
@@ -29,7 +30,7 @@ class RandomCircle(QMainWindow):
         self.permission = False
 
     def draw_random_circle(self, qp):
-        qp.setBrush(QColor("yellow"))
+        qp.setBrush(QColor(randint(0, 255), randint(0, 255), randint(0, 255)))
         position_x = randint(5, self.width() - 5)
         position_y = randint(5, self.height() - 5)
         max_radius = min((self.width() - position_x, position_x, position_y, self.height() - position_y))
